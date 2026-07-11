@@ -1,0 +1,98 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: #0b0f19;
+}
+
+/* Glass-morphism effect */
+.glass {
+  background: rgba(15, 23, 42, 0.8);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(71, 85, 105, 0.3);
+}
+
+/* Smooth scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0f172a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #475569;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #64748b;
+}
+
+/* Smooth transitions */
+* {
+  transition: border-color 0.2s, background-color 0.2s;
+}
+
+/* Custom animation for cybersecurity feel */
+@keyframes glow {
+  0%, 100% {
+    text-shadow: 0 0 10px rgba(220, 38, 38, 0.5);
+  }
+  50% {
+    text-shadow: 0 0 20px rgba(220, 38, 38, 0.8);
+  }
+}
+
+.glow-text {
+  animation: glow 2s ease-in-out infinite;
+}
+/* Glass Card Component */
+.glass-card {
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(71, 85, 105, 0.4);
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.glass-card:hover {
+  background: rgba(15, 23, 42, 0.8);
+  border: 1px solid rgba(71, 85, 105, 0.6);
+}
+
+/* Metric labels and values */
+.metric-label {
+  @apply text-xs font-mono uppercase tracking-widest text-slate-400;
+}
+
+.metric-value {
+  @apply text-3xl font-bold text-slate-100 mt-2;
+}
+
+/* Threat glow animation */
+@keyframes threat-glow {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(220, 38, 38, 0.3), inset 0 0 10px rgba(220, 38, 38, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(220, 38, 38, 0.6), inset 0 0 15px rgba(220, 38, 38, 0.2);
+  }
+}
+
+.threat-glow {
+  animation: threat-glow 2s ease-in-out infinite;
+}
