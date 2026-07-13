@@ -5,13 +5,19 @@ import './index.css';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [initialThreatActive, setInitialThreatActive] = useState(false);
+
+  const handleLoginSuccess = (startWithThreat = false) => {
+    setInitialThreatActive(startWithThreat);
+    setIsLoggedIn(true);
+  };
 
   return (
     <div className="App">
       {isLoggedIn ? (
-        <PrahariDashboard />
+        <PrahariDashboard initialThreatActive={initialThreatActive} />
       ) : (
-        <PrahariLogin onLoginSuccess={() => setIsLoggedIn(true)} />
+        <PrahariLogin onLoginSuccess={handleLoginSuccess} />
       )}
     </div>
   );

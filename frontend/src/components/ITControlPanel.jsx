@@ -8,8 +8,6 @@ import { Wrench, ChevronDown, ChevronUp, AlertCircle } from 'lucide-react';
 export function ITControlPanel() {
   const [isOpen, setIsOpen] = useState(false);
   const [showDialog, setShowDialog] = useState(null);
-  const [selectedModel, setSelectedModel] = useState('ATO Detection v2.4.1');
-  const [sensitivity, setSensitivity] = useState(7);
   const [alerts, setAlerts] = useState({
     email: true,
     slack: true,
@@ -18,12 +16,6 @@ export function ITControlPanel() {
   });
   const [webhookUrl, setWebhookUrl] = useState('');
   const [diagnosticResult, setDiagnosticResult] = useState(null);
-
-  const models = [
-    'ATO Detection v2.4.1',
-    'Fraud Detection v1.8',
-    'DDoS Protection v3.2',
-  ];
 
   const handleDestructiveAction = (action) => {
     if (action === 'lock') {
@@ -100,51 +92,7 @@ export function ITControlPanel() {
             </div>
           </div>
 
-          {/* Section 2: FPGA Configuration */}
-          <div>
-            <h4 className="text-sm font-semibold text-slate-300 uppercase tracking-wide mb-4">FPGA Configuration</h4>
-            <div className="space-y-4">
-              {/* Model Selection */}
-              <div>
-                <label className="block text-xs font-medium text-slate-400 mb-2">Detection Model</label>
-                <select
-                  value={selectedModel}
-                  onChange={(e) => setSelectedModel(e.target.value)}
-                  className="w-full px-3 py-2 bg-slate-700 border border-slate-600 rounded-lg text-sm text-slate-100 focus:outline-none focus:border-cyan-500"
-                >
-                  {models.map(m => (
-                    <option key={m} value={m}>{m}</option>
-                  ))}
-                </select>
-              </div>
 
-              {/* Sensitivity Slider */}
-              <div>
-                <div className="flex items-center justify-between mb-2">
-                  <label className="text-xs font-medium text-slate-400">Detection Sensitivity</label>
-                  <span className="text-sm font-bold text-cyan-400">{sensitivity}/10</span>
-                </div>
-                <input
-                  type="range"
-                  min="1"
-                  max="10"
-                  value={sensitivity}
-                  onChange={(e) => setSensitivity(parseInt(e.target.value))}
-                  className="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-cyan-500"
-                />
-              </div>
-
-              {/* Action Buttons */}
-              <div className="grid grid-cols-2 gap-3">
-                <button className="px-3 py-2 rounded-lg bg-emerald-900/50 hover:bg-emerald-800/50 text-emerald-200 text-sm font-medium transition-colors border border-emerald-700">
-                  ▶ Push Config
-                </button>
-                <button className="px-3 py-2 rounded-lg bg-slate-700 hover:bg-slate-600 text-slate-100 text-sm font-medium transition-colors">
-                  ⮌ Rollback
-                </button>
-              </div>
-            </div>
-          </div>
 
           {/* Section 3: Alert Routing */}
           <div>
@@ -153,7 +101,8 @@ export function ITControlPanel() {
               {Object.entries(alerts).map(([key, value]) => (
                 <div key={key} className="flex items-center justify-between">
                   <label className="text-sm text-slate-300 capitalize">{key === 'pagerduty' ? 'PagerDuty' : key === 'webhook' ? 'Webhook' : key}</label>
-                  <switch
+                  <button
+                    type="button"
                     className="relative inline-flex h-6 w-11 items-center rounded-full transition-colors"
                     style={{
                       backgroundColor: value ? '#10b981' : '#475569',
@@ -169,7 +118,7 @@ export function ITControlPanel() {
                       className="h-5 w-5 rounded-full bg-white transition-transform"
                       style={{ transform: value ? 'translateX(22px)' : 'translateX(2px)' }}
                     />
-                  </switch>
+                  </button>
                 </div>
               ))}
               {alerts.webhook && (
